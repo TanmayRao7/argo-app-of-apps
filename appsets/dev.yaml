@@ -7,20 +7,24 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - matrix:
-        generators:
-          - git:
-              repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
-              revision: main
-              files:
-                - path: appconfig  # Fetch environment-specific values
-          - clusters:
-              selector:
-                matchLabels:
-                  env: 'prod'  # Match cluster label with environment from dev.yaml
+    # - matrix:
+    #     generators:
+    #       - git:
+    #           repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
+    #           revision: main
+    #           files:
+    #             - path: appconfig  # Fetch environment-specific values
+    #       - clusters:
+    #           selector:
+    #             matchLabels:
+    #               env: 'prod'  # Match cluster label with environment from dev.yaml
+    clusters:
+      selector:
+        matchLabels:
+          env: 'prod'
   template:
     metadata:
-      name: 'dev-{{ .name }}'
+      name: 'dev'
     spec:
       project: default
       syncPolicy:
@@ -35,7 +39,7 @@ spec:
           path: helm-charts
           helm:
             valueFiles:
-              - ../appconfig/'{{ .valuesFile }}'  # Dynamically pick values-dev.yaml
+              - ../appconfig/{{ .valuesFile }}  # Dynamically pick values-dev.yaml
       destination:
         server: '{{ .server }}'
-        namespace: '{{ .namespace }}'
+        namespace: 'dev'
