@@ -10,7 +10,7 @@ spec:
     - matrix:
         generators:
           - git:
-              repoURL: https://github.com/TanmayRao7/app-of-apps-v2.git
+              repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
               revision: main
               files:
                 - path: appconfig/dev.yaml  # Fetch environment-specific values
