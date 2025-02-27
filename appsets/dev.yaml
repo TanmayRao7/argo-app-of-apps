@@ -13,7 +13,7 @@ spec:
               repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
               revision: main
               files:
-                - path: appconfig  # Fetch environment-specific values
+                - path: appconfig/dev.yaml  # Fetch environment-specific values
           - clusters:
               selector:
                 matchLabels:
