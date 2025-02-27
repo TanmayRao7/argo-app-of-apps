@@ -1,22 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: dev-appset
+  name: dev-app-appset
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - list:
-      elements:
-        - name: app-v1
-          namespace: dev-v1
-          valuesFile: "values-dev.yaml"
-          environment: dev
-        - name: app-v2
-          namespace: dev-v2
-          valuesFile: "values-dev.yaml"
-          environment: dev
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/TanmayRao7/app-of-apps-v2.git
+              revision: main
+              files:
+                - path: appconfig/dev.yaml  # Fetch environment-specific values
+          - clusters:
+              selector:
+                matchLabels:
+                  env: "{{ .environment }}"  # Match cluster label with environment from dev.yaml
   template:
     metadata:
       name: '{{ .environment }}-{{ .name }}'
@@ -27,14 +28,14 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true        
+          - CreateNamespace=true        
       sources:
         - repoURL: https://github.com/TanmayRao7/app-of-apps-v2.git
           targetRevision: main
-          path: helm-charts 
+          path: helm-charts
           helm:
             valueFiles:
-              - '{{ .valuesFile }}'
+              - ../appconfig/'{{ .valuesFile }}'  # Dynamically pick values-dev.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: '{{ .server }}'
         namespace: '{{ .namespace }}'

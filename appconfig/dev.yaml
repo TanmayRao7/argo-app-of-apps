@@ -1,0 +1,5 @@
+elements:
+  - name: app-v1
+    namespace: dev-v1
+    valuesFile: "values-dev.yaml"
+    environment: dev
