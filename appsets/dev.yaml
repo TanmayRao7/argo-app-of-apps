@@ -18,7 +18,7 @@ spec:
     #           selector:
     #             matchLabels:
     #               env: 'prod'  # Match cluster label with environment from dev.yaml
-    clusters:
+  - clusters:
       selector:
         matchLabels:
           env: 'prod'
