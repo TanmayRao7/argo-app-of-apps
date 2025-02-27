@@ -17,7 +17,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  env: "{{ .environment }}"  # Match cluster label with environment from dev.yaml
+                  env: 'prod'  # Match cluster label with environment from dev.yaml
   template:
     metadata:
       name: '{{ .environment }}-{{ .name }}'
