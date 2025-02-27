@@ -1,3 +1,6 @@
+defaults: &defaultValues
+  targetversion: master
+  environment: dev
 elements:
   - name: app-v1
     namespace: dev-v1

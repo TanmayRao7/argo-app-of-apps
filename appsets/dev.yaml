@@ -7,21 +7,21 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    # - matrix:
-    #     generators:
-    #       - git:
-    #           repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
-    #           revision: main
-    #           files:
-    #             - path: appconfig  # Fetch environment-specific values
-    #       - clusters:
-    #           selector:
-    #             matchLabels:
-    #               env: 'prod'  # Match cluster label with environment from dev.yaml
-  - clusters:
-      selector:
-        matchLabels:
-          env: 'prod'
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
+              revision: main
+              files:
+                - path: appconfig  # Fetch environment-specific values
+          - clusters:
+              selector:
+                matchLabels:
+                  env: '{{ .environment }}'  # Match cluster label with environment from dev.yaml
+  # - clusters:
+  #     selector:
+  #       matchLabels:
+  #         env: 'prod'
   template:
     metadata:
       name: 'dev'
