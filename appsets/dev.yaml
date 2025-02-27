@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+        - name: app-v1
+          namespace: dev-v1
+          valuesFile: "values-dev.yaml"
+          environment: dev
+        - name: app-v2
+          namespace: dev-v2
+          valuesFile: "values-dev.yaml"
+          environment: dev
+  template:
+    metadata:
+      name: '{{ .environment }}-{{ .name }}'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true        
+      sources:
+        - repoURL: https://github.com/TanmayRao7/app-of-apps-v2.git
+          targetRevision: main
+          path: helm-charts 
+          helm:
+            valueFiles:
+              - '{{ .valuesFile }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .namespace }}'

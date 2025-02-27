@@ -1,0 +1,20 @@
+replicaCount: 1
+image:
+  repository: nginx
+  tag: "1.18" 
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: false
+resources: {}
+autoscaling:
+  enabled: false
+nodeSelector: {}
+tolerations: []
+affinity: {}
+env: qa
+configName: "qa-app-config"
+# custom:
+#   homepageText: "QA Release: 1.18"

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: {{ .Release.Namespace }}
+data:
+  index.html: |
+    <html>
+    <head><title>Home Page</title></head>
+    <body>
+    <pre>
+{{ .Files.Get (printf "app-config/%s.properties" .Values.configName) | indent 4 }}
+    </pre>
+    </body>
+    </html>
