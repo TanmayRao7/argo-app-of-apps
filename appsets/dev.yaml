@@ -20,7 +20,7 @@ spec:
                   env: 'prod'  # Match cluster label with environment from dev.yaml
   template:
     metadata:
-      name: '{{ .environment }}-{{ .name }}'
+      name: 'dev-{{ .name }}'
     spec:
       project: default
       syncPolicy:
