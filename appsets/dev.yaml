@@ -39,7 +39,8 @@ spec:
           path: helm-charts
           helm:
             valueFiles:
-              - ../appconfig/{{ .valuesFile }}  # Dynamically pick values-dev.yaml
+              #- ../appconfig/{{ .valuesFile }}  # Dynamically pick values-dev.yaml
+            - ../appconfig/values-dev.yaml
       destination:
         server: '{{ .server }}'
         namespace: 'dev'
