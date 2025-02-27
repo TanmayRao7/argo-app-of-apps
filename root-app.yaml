@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
     path: appsets
-    targetRevision: master
+    targetRevision: main
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
