@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 
+    repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
     path: appsets
     targetRevision: master
   destination:
