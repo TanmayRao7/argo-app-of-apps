@@ -1,4 +1,4 @@
 components:
-  - [app-v1, dev-v1, values-dev.yaml, dev]
-  - [app-v2, dev-v2, values-dev.yaml, dev]
-  - [app-v3, dev-v3, values-dev.yaml, dev]
+  - { app: app-v1, env: dev-v1, valuesFile: values-dev.yaml, namespace: dev }
+  - { app: app-v2, env: dev-v2, valuesFile: values-dev.yaml, namespace: dev }
+  - { app: app-v3, env: dev-v3, valuesFile: values-dev.yaml, namespace: dev }
