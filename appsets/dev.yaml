@@ -15,7 +15,7 @@ spec:
               files:
                 - path: appconfig/dev.yaml
           - list:
-              elementsYaml: "{{ .key.components | toJson }}"
+              elements: "{{ .components }}"  # Directly referencing components from dev.yaml
   template:
     metadata:
       name: "{{ .app }}"
