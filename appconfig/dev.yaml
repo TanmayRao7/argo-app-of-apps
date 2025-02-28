@@ -1,1 +1,5 @@
-components: '[{"app": "app-dev", "namespace": "dev"}, {"app": "app-qa", "namespace": "qa"}]'
+components: 
+  '[
+    {"app": "app-dev", "namespace": "dev"}, 
+    {"app": "app-qa", "namespace": "qa"}
+  ]'
