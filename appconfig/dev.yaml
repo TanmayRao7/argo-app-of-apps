@@ -1,5 +1,10 @@
-components: |
-  [
-    {"app": "app-dev", "env": "dev", "valuesFile": "values-dev.yaml", "namespace": "dev"},
-    {"app": "app-qa", "env": "qa", "valuesFile": "values-dev.yaml", "namespace": "qa"}
-  ]
+components:
+  - app: "app-dev"
+    namespace: "dev"
+  - app: "app-qa"
+    namespace: "qa"
+# components: |
+#   [
+#     {"app": "app-v1","namespace": "dev"},
+#     {"app": "app-v2","namespace": "qa"}
+#   ]
