@@ -15,7 +15,7 @@ spec:
               files:
                 - path: appconfig/dev.yaml
           - list:
-              elementsYaml: "{{ .components | fromJson }}"
+              elementsYaml: "{{ .components | toJson }}"
   template:
     metadata:
       name: "{{ .app }}"
@@ -35,5 +35,5 @@ spec:
             valueFiles:
             - ../appconfig/{{ .valuesFile }}
       destination:
-        server: '{{ .server }}'
+        server: "https://kubernetes.default.svc"
         namespace: "{{ .namespace }}"
