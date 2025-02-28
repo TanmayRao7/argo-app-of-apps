@@ -13,18 +13,12 @@ spec:
               repoURL: https://github.com/TanmayRao7/argo-app-of-apps.git
               revision: main
               files:
-                - path: appconfig/dev.yaml  # Fetch environment-specific values
-          - clusters:
-              selector:
-                matchLabels:
-                  env: '{{ .environment }}'  # Match cluster label with environment from dev.yaml
-  # - clusters:
-  #     selector:
-  #       matchLabels:
-  #         env: 'prod'
+                - path: appconfig/dev.yaml
+          - list:
+              elementsYaml: "{{ .components | toJson }}"
   template:
     metadata:
-      name: 'dev'
+      name: "{{ .[0] }}"   # app name
     spec:
       project: default
       syncPolicy:
@@ -39,8 +33,7 @@ spec:
           path: helm-charts
           helm:
             valueFiles:
-              #- ../appconfig/{{ .valuesFile }}  # Dynamically pick values-dev.yaml
-            - ../appconfig/values-dev.yaml
+            - ../appconfig/{{ .[2] }}  # values-dev.yaml
       destination:
         server: '{{ .server }}'
-        namespace: 'dev'
+        namespace: "{{ .[3] }}"  # dev
