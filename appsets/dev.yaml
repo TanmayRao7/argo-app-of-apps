@@ -15,10 +15,11 @@ spec:
               files:
                 - path: appconfig/dev.yaml
           - list:
-              elementsYaml: "{{ .components | toJson }}"
+              elementsYaml: |
+                {{ .components | fromJson }}
   template:
     metadata:
-      name: "{{ .app }}"  # Using dictionary key instead of list index
+      name: "{{ .app }}"
     spec:
       project: default
       syncPolicy:
@@ -33,7 +34,7 @@ spec:
           path: helm-charts
           helm:
             valueFiles:
-            - ../appconfig/{{ .valuesFile }}  # Reference dictionary key
+            - ../appconfig/{{ .valuesFile }}
       destination:
         server: '{{ .server }}'
-        namespace: "{{ .namespace }}"  # Reference dictionary key
+        namespace: "{{ .namespace }}"
