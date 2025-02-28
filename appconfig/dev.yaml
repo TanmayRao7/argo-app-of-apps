@@ -1,16 +1,6 @@
-components:
-  - app: "app-dev"
-    namespace: "dev"
-  - app: "app-qa"
-    namespace: "qa"
-# components: |
-#   [
-#     {
-#       "app": "app-dev",
-#       "namespace": "dev"
-#     },
-#     {
-#       "app": "app-qa",
-#       "namespace": "qa"
-#     }
-#   ]
+key:
+  components:
+    - app: component1
+      namespace: component1
+    - app: component2
+      namespace: component2
